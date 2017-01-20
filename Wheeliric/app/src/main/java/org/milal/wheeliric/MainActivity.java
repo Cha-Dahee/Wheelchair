@@ -3,11 +3,14 @@ package org.milal.wheeliric;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by Yoojung on 2017-01-19.
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String choice_do = "";
     String choice_do2 = "";
+    String address = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner1);
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
-        Button btn = (Button) findViewById(R.id.goMap);
+        final Button btn = (Button) findViewById(R.id.goMap);
+        final Button btn2 = (Button) findViewById(R.id.goMap2);
+        final EditText text = (EditText) findViewById(R.id.search);
+
+
+        text.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == event.KEYCODE_ENTER){
+                    return true;
+                }
+                return false;
+            }
+        });
 
         adspin1 = ArrayAdapter.createFromResource(this, R.array.spinner_do, android.R.layout.simple_spinner_dropdown_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,6 +130,21 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                 intent.putExtra("categories", choice_do2);
                 startActivity(intent);
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!text.getText().toString().equals("")) {
+                    address = text.getText().toString();
+                    Intent intent = new Intent(getApplicationContext(), MapsActivity2.class);
+                    intent.putExtra("address", address);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "입력 후 검색해 주세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

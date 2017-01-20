@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 /**
- * Created by user on 2017-01-18.
+ * Created by Yoojung on 2017-01-18.
  * 어플 실행시 제일 먼저 나타나는 로고 창
  */
 

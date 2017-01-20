@@ -59,4 +59,5 @@
         <item>화장실</item>
         <item>공원</item>
     </string-array>
+    <string name="title_activity_maps2">Map</string>
 </resources>

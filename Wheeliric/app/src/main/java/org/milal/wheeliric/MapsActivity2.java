@@ -16,72 +16,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private GpsInfo gps;
-    private TMapAPI places;
-    private GoogleGeoAPI geo;
-
+    private TMapPoiAPI places;
     List<Facility> mList = null;
-    //List<Marker> pMarker = null;
-
-    private double latitude;
-    private double longitude;
-    private String categories;
+    String address = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps2);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //직접 검색한 내용을 받아온다
         Bundle bundle = getIntent().getExtras();
-        categories = bundle.getString("categories");
+        address = bundle.getString("address");
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        String vicinity;
-        //pMarker = new ArrayList<>();
         mMap = googleMap;
-        geo = new GoogleGeoAPI();
 
-        //현재위치를 받아 온다
-        gps = new GpsInfo(MapsActivity.this);
-        if(gps.isGetLocation()){
-            latitude = gps.getLatitude();
-            longitude = gps.getLongitude();
-        } else{
-            gps.showSettingAlert();
-        }
-
-        //받아온 현재 위치를 마커로 만든다
-        LatLng myPosition = new LatLng(latitude, longitude);
         try {
-            vicinity = geo.execute(myPosition).get();
-            mMap.addMarker(new MarkerOptions().position(myPosition).title("현재위치").snippet(vicinity)).showInfoWindow();
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(myPosition));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
             addMarker(mMap);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    //API를 사용해 받아온 장소 정보를 마커로 만든다
+    //TMap api에서 직접 검색하여 받아온 장소 정보를 마커로 가져온다
     public void addMarker(GoogleMap googleMap) throws ExecutionException, InterruptedException {
 
-        /*GooglePlaceAPI places = new GooglePlaceAPI();
+        places = new TMapPoiAPI(MapsActivity2.this);
         mList = new ArrayList<>();
-        mList = places.execute(36.082141, 129.398496, 500.0).get();*/
-
-        places = new TMapAPI(MapsActivity.this, categories);
-        mList = new ArrayList<>();
-        mList = places.execute(latitude, longitude).get();
+        mList = places.execute(address).get();
 
         for (Facility i : mList) {
             LatLng latLng = new LatLng(i.getLat(), i.getLng());
@@ -94,6 +68,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             googleMap.addMarker(markerOptions);
             //pMarker.add(item);
         }
+
+        LatLng latLng = mList.get(0).getLatLng();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
         //말풍선 클릭 리쓰너
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener(){
 

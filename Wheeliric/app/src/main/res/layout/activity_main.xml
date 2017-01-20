@@ -6,47 +6,98 @@
     android:background="#FFFFFF">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Wheeliric"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/textView1"
-        android:text="카테고리를 선택하세요"
+        android:text="카테고리 선택"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"/>
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/spinner1"
         android:textColor="#000000"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/textView2"
-        android:text="업종을 선택하세요"
+        android:text="컨텐츠 선택"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"/>
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/spinner2"
         android:textColor="#000000"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <Button
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="20dp"
         android:text="지도 검색"
+        android:layout_gravity="center"
         android:id="@+id/goMap" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:id="@+id/textView3"
+        android:text="직접 원하는 장소를 입력하세요"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/search"
+        android:textColor="#000000"
+        android:hint="예) 양덕동 스타벅스"
+        android:lineSpacingExtra="1.2sp"
+        android:lines="1" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="지도 검색"
+        android:layout_gravity="center"
+        android:id="@+id/goMap2" />
 
 </LinearLayout>
