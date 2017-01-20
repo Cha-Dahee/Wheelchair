@@ -79,7 +79,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mList = new ArrayList<>();
         mList = places.execute(36.082141, 129.398496, 500.0).get();*/
 
-        geo = new GoogleGeoAPI();
         places = new TMapAPI(MapsActivity.this, categories);
         mList = new ArrayList<>();
         mList = places.execute(latitude, longitude).get();
