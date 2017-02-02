@@ -1,6 +1,11 @@
 package org.milal.wheeliric;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yoojung on 2017-01-17.
@@ -8,33 +13,45 @@ import com.google.android.gms.maps.model.LatLng;
  */
 
 public class Facility {
-    String name;
-    String id;
-    String vicinity;
-    double lat;
-    double lng;
-    LatLng latLng;
+    private String name;
+    private String category;
+    private String vicinity;
+    private String info;
+    private double lat;
+    private double lng;
+    private LatLng latLng;
+    private List<Bitmap> image;
 
-    public Facility(String name, String id, String vicinity, double lat, double lng){
+    public Facility(){
+        info = "";
+        image = new ArrayList<>();
+    }
+
+    public Facility(String name, String category, String vicinity, double lat, double lng){
         this.name = name;
-        this.id = id;
+        this.category = category;
         this.vicinity = vicinity;
         this.lat = lat;
         this.lng = lng;
         latLng = new LatLng(lat, lng);
     }
 
-    void setName(String name){this.name = name;}
-    void setId(String id){this.id = id;}
-    void setVicinity(String vicinity){this.vicinity = vicinity;}
-    void setLat(double lat){this.lat = lat;}
-    void setLng(double lng){this.lng = lng;}
-    void setLatLng(double lat, double lng){this.lat = lat; this.lng = lng;}
+    public void setName(String name){this.name = name;}
+    public void setCategory(String category){this.category = category;}
+    public void setVicinity(String vicinity){this.vicinity = vicinity;}
+    public void setLat(double lat){this.lat = lat;}
+    public void setLng(double lng){this.lng = lng;}
+    public void setLatLng(double lat, double lng){this.lat = lat; this.lng = lng;}
+    public void setInfo(String info){this.info = info;}
+    public void setImage(Bitmap image){this.image.add(image);}
+    public void setImage(List<Bitmap> image){this.image = image;}
 
-    String getName(){return name;}
-    String getId(){return id;}
-    String getVicinity(){return vicinity;}
-    double getLat(){return lat;}
-    double getLng(){return lng;}
-    LatLng getLatLng(){return latLng;}
+    public String getInfo(){return info;}
+    public List<Bitmap> getImage(){return image;}
+    public String getName(){return name;}
+    public String getCategory(){return category;}
+    public String getVicinity(){return vicinity;}
+    public double getLat(){return lat;}
+    public double getLng(){return lng;}
+    public LatLng getLatLng(){return latLng;}
 }

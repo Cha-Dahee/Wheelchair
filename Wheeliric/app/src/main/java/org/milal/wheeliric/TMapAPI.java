@@ -1,8 +1,8 @@
 package org.milal.wheeliric;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapPOIItem;
@@ -26,28 +26,15 @@ import javax.xml.parsers.ParserConfigurationException;
 public class TMapAPI extends AsyncTask<Double, Void, List<Facility>> {
 
     Context mContext;
-    private double latitude;
-    private double longitude;
     private String categories;
-    private int radius;
     private static final String APIKey = "95376795-5b4e-31aa-8445-869968fe3d20";
 
-    List<TMapPOIItem> tList = new ArrayList<>();
-    List<Facility> mList = new ArrayList<>();
-    ProgressDialog asyncDialog;
+    List<TMapPOIItem> tList;
+    List<Facility> mList;
 
     public TMapAPI(Context context, String categories){
         this.mContext = context;
         this.categories = categories;
-    }
-
-    @Override
-    protected void onPreExecute(){
-        asyncDialog = new ProgressDialog(mContext);
-        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        asyncDialog.setMessage("로딩중입니다..");
-        asyncDialog.show();
-        super.onPreExecute();
     }
 
     @Override
@@ -57,9 +44,12 @@ public class TMapAPI extends AsyncTask<Double, Void, List<Facility>> {
         tmaptapi.setSKPMapAuthentication(APIKey);
         TMapData tmapdata = new TMapData();
 
-        latitude = values[0];
-        longitude = values[1];
-        radius = 10;
+        double latitude = values[0];
+        double longitude = values[1];
+        int radius = 10;
+
+        tList = new ArrayList<>();
+        mList = new ArrayList<>();
 
         TMapPoint tpoint = new TMapPoint(latitude, longitude);
         try {
@@ -72,33 +62,30 @@ public class TMapAPI extends AsyncTask<Double, Void, List<Facility>> {
             e.printStackTrace();
         }
 
-        StringBuilder mAddress = new StringBuilder();
-        for (TMapPOIItem i : tList) {
-            String address;
-            String id = i.getPOIID();
-            String name = i.getPOIName();
-            TMapPoint point = i.getPOIPoint();
-            double tLat = point.getLatitude();
-            double tLng = point.getLongitude();
+        if(tList != null){
+            StringBuilder mAddress = new StringBuilder();
+            for (TMapPOIItem i : tList) {
+                String name = i.getPOIName();
+                TMapPoint point = i.getPOIPoint();
+                double tLat = point.getLatitude();
+                double tLng = point.getLongitude();
+                String category = String.valueOf(i.middleBizName);
+                Log.d("detail", category);
 
-            if(i.upperAddrName != null)
-                mAddress.append(i.upperAddrName);
-            if(i.middleAddrName != null)
-                mAddress.append(" ").append(i.middleAddrName);
-            if(i.lowerAddrName != null)
-                mAddress.append(" ").append(i.lowerAddrName);
-            if(i.detailAddrName != null)
-                mAddress.append(" ").append(i.detailAddrName);
+                if (i.upperAddrName != null)
+                    mAddress.append(i.upperAddrName);
+                if (i.middleAddrName != null)
+                    mAddress.append(" ").append(i.middleAddrName);
+                if (i.lowerAddrName != null)
+                    mAddress.append(" ").append(i.lowerAddrName);
+                if (i.detailAddrName != null)
+                    mAddress.append(" ").append(i.detailAddrName);
 
-            String vin = mAddress.toString();
-            mList.add(new Facility(name, id, vin, tLat, tLng));
-            mAddress.delete(0, mAddress.length());
+                String vin = mAddress.toString();
+                mList.add(new Facility(name, category, vin, tLat, tLng));
+                mAddress.delete(0, mAddress.length());
+            }
         }
         return mList;
-    }
-
-    @Override
-    protected void onPostExecute(List<Facility> result){
-        asyncDialog.dismiss();
     }
 }

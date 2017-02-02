@@ -3,6 +3,7 @@ package org.milal.wheeliric;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -83,16 +84,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mList = new ArrayList<>();
         mList = places.execute(latitude, longitude).get();
 
-        for (Facility i : mList) {
-            LatLng latLng = new LatLng(i.getLat(), i.getLng());
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title(i.getName());
-            markerOptions.snippet(i.getVicinity());
-            markerOptions.alpha(0.6f);
-            // Marker item =
-            googleMap.addMarker(markerOptions);
-            //pMarker.add(item);
+        if(mList.isEmpty()){
+            Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            for (Facility i : mList) {
+                LatLng latLng = new LatLng(i.getLat(), i.getLng());
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(i.getName());
+
+                if(!i.getCategory().equals("null")){
+                    markerOptions.snippet(i.getVicinity() + "(" + i.getCategory() + ")");
+                } else{
+                    markerOptions.snippet(i.getVicinity());
+                }
+
+                markerOptions.alpha(0.6f);
+                // Marker item =
+                googleMap.addMarker(markerOptions);
+                //pMarker.add(item);
+            }
         }
         //말풍선 클릭 리쓰너
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener(){
@@ -103,6 +115,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("name", marker.getTitle());
                 intent.putExtra("longitude", marker.getPosition().longitude);
                 intent.putExtra("latitude", marker.getPosition().latitude);
+
+                if(marker.getSnippet().contains("(")){
+                    int i = marker.getSnippet().indexOf("(");
+                    String s = marker.getSnippet().substring(i+1, (marker.getSnippet().length())-1);
+                    intent.putExtra("category", s);
+                } else{
+                    intent.putExtra("category", "null");
+                }
                 startActivity(intent);
             }
         });

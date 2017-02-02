@@ -19,13 +19,15 @@ import javax.xml.parsers.ParserConfigurationException;
  * Google Api 보다 정확한듯..
  */
 
-public class TMapGeoAPI extends AsyncTask<Double, Void, String>{
+public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
 
+    private static final int NEW_ADDRESS = 0;
+    private static final int OLD_ADDRESS = 1;
     private Context mContext;
     private TMapData tmapdata;
     private TMapAddressInfo addressInfo;
     private ProgressDialog asyncDialog;
-    String address;
+    String address[];
 
     public TMapGeoAPI(Context context){
         mContext = context;
@@ -41,17 +43,21 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String>{
     }
 
     @Override
-    protected String doInBackground(Double... values){
+    protected String[] doInBackground(Double... values){
 
         double latitude = values[0];
         double longitude = values[1];
 
         tmapdata = new TMapData();
         addressInfo = new TMapAddressInfo();
+        address = new String[2];
 
         try {
+            addressInfo = tmapdata.reverseGeocoding(latitude, longitude, "A03");
+            address[NEW_ADDRESS] = addressInfo.strFullAddress;
+
             addressInfo = tmapdata.reverseGeocoding(latitude, longitude, "A02");
-            address = addressInfo.strFullAddress;
+            address[OLD_ADDRESS] = addressInfo.strFullAddress;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
@@ -64,7 +70,7 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String>{
     }
 
     @Override
-    protected void onPostExecute(String result){
+    protected void onPostExecute(String[] result){
         asyncDialog.dismiss();
     }
 }

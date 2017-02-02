@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "입력 후 검색해 주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "장소를 입력 후 검색해 주세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });
