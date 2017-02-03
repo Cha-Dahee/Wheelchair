@@ -34,15 +34,6 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
     }
 
     @Override
-    protected void onPreExecute(){
-        asyncDialog = new ProgressDialog(mContext);
-        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        asyncDialog.setMessage("로딩중입니다..");
-        asyncDialog.show();
-        super.onPreExecute();
-    }
-
-    @Override
     protected String[] doInBackground(Double... values){
 
         double latitude = values[0];
@@ -67,10 +58,5 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
         }
 
         return address;
-    }
-
-    @Override
-    protected void onPostExecute(String[] result){
-        asyncDialog.dismiss();
     }
 }
