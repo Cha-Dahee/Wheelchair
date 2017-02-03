@@ -2,7 +2,6 @@ package org.milal.wheeliric;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapPOIItem;
@@ -46,7 +45,7 @@ public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
         mList = new ArrayList<>();
 
         try {
-            tList = tmapdata.findAddressPOI(address, 200);
+            tList = tmapdata.findAllPOI(address, 200);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
@@ -63,7 +62,6 @@ public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
                 double tLat = point.getLatitude();
                 double tLng = point.getLongitude();
                 String category = String.valueOf(i.middleBizName);
-                Log.d("detail", category);
 
                 if (i.upperAddrName != null)
                     mAddress.append(i.upperAddrName);

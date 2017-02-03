@@ -2,7 +2,6 @@ package org.milal.wheeliric;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapPOIItem;
@@ -27,7 +26,7 @@ public class TMapAPI extends AsyncTask<Double, Void, List<Facility>> {
 
     Context mContext;
     private String categories;
-    private static final String APIKey = "95376795-5b4e-31aa-8445-869968fe3d20";
+        private static final String APIKey = "95376795-5b4e-31aa-8445-869968fe3d20";
 
     List<TMapPOIItem> tList;
     List<Facility> mList;
@@ -69,8 +68,10 @@ public class TMapAPI extends AsyncTask<Double, Void, List<Facility>> {
                 TMapPoint point = i.getPOIPoint();
                 double tLat = point.getLatitude();
                 double tLng = point.getLongitude();
-                String category = String.valueOf(i.middleBizName);
-                Log.d("detail", category);
+
+                String category = "null";
+                if(categories.equals("숙박"))
+                    category = "숙박";
 
                 if (i.upperAddrName != null)
                     mAddress.append(i.upperAddrName);

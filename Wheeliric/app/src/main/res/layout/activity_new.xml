@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView"
+                android:id="@+id/textView1"
                 android:gravity="center"
                 android:textSize="25sp"
                 android:textColor="@android:color/black"/>
@@ -63,8 +63,14 @@
                 android:id="@+id/textView3"
                 android:layout_margin="@dimen/activity_vertical_margin" />
 
-        </LinearLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:id="@+id/listView1"></ListView>
 
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

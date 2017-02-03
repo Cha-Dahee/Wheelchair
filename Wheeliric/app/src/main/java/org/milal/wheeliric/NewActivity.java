@@ -3,6 +3,7 @@ package org.milal.wheeliric;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
@@ -25,27 +26,28 @@ public class NewActivity extends AppCompatActivity {
     final static String GYEONGGI = "GYEONGGI";
     final static String TOUR = "TOUR";
 
-    private TextView textView;
-    private TextView textView2;
-    private TextView textView3;
-
     private TMapGeoAPI geo;
     private JsoupParser parser;
-    Facility facility;
+    private Facility facility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
 
-        textView = (TextView) findViewById(R.id.textView);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        textView3 = (TextView) findViewById(R.id.textView3);
         ImageView image1 = (ImageView) findViewById(R.id.image1);
         ImageView image2 = (ImageView) findViewById(R.id.image2);
         ImageView image3 = (ImageView) findViewById(R.id.image3);
 
-        //정보를 넘겨받는다
+        //TextView - 1:이름; 2:주소; 3:정보
+        TextView textView1 = (TextView) findViewById(R.id.textView1);
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
+        TextView textView3 = (TextView) findViewById(R.id.textView3);
+
+        //네이버, 다음 카페 및 블로그 리스트 정보
+        ListView listView1 = (ListView) findViewById(R.id.listView1);
+
+        //이전 액티비티로부터 정보를 넘겨받는다
         Bundle bundle = getIntent().getExtras();
         facility = new Facility();
         facility.setName(bundle.getString("name"));
@@ -91,8 +93,9 @@ public class NewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        textView.setText(facility.getName());
+        textView1.setText(facility.getName());
         textView2.setText(facility.getVicinity());
         textView3.setText(facility.getInfo());
+        //listView1.setAdapter(...);
     }
 }
