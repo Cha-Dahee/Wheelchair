@@ -66,6 +66,8 @@ public class InfoFragment extends Fragment {
             //TMapGeoAPI로 부터 주소를 받아옴(옛주소, 신주소 선택 가능)
             facility.setVicinity((geo.execute(facility.getLat(), facility.getLng()).get())[NEW_ADDRESS]);
 
+            Boolean flag = false;
+
             //주소에 따라 검색하는 사이트 상이
             if(facility.getVicinity().contains("대구") && facility.getCategory().contains("숙박")){
                 info = parser.execute(DAEGU_STAY, facility.getName()).get();
@@ -77,8 +79,14 @@ public class InfoFragment extends Fragment {
                 info = parser.execute(ULSAN, facility.getName()).get();
             } else if(facility.getVicinity().contains("경기")){
                 info = parser.execute(GYEONGGI, facility.getName()).get();
-            } */else{
+            } */ else{
                 info = parser.execute(TOUR, facility.getName()).get();
+                flag = true;
+            }
+
+            if(flag == false && info.getInfo().equals("검색결과가 없습니다.")){
+                JsoupParser parser2 = new JsoupParser();
+                info = parser2.execute(TOUR, facility.getName()).get();
             }
 
             facility.setInfo(info.getInfo());

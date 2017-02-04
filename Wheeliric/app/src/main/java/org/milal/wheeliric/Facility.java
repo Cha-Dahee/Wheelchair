@@ -23,7 +23,6 @@ public class Facility {
     private List<Bitmap> image;
 
     public Facility(){
-        info = "";
         image = new ArrayList<>();
     }
 

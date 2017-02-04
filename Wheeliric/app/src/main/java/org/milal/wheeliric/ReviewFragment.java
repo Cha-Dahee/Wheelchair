@@ -35,6 +35,12 @@ public class ReviewFragment extends Fragment {
         ImageView image1 = (ImageView) view.findViewById(R.id.image1);
 
         Button button = (Button) view.findViewById(R.id.write);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "리뷰를 쓸거얌", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         facility = new Facility();
         facility.setName(getArguments().getString("name"));
@@ -46,15 +52,10 @@ public class ReviewFragment extends Fragment {
         facility.setImage(bitmap);
 
         textView1.setText(facility.getName());
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "리뷰를 쓸거얌", Toast.LENGTH_SHORT).show();
-            }
-        });
-        image1.setImageBitmap(facility.getImage().get(0));
         textView2.setText("★★★★☆    우와 짱짱이에여~~ 너무 좋아여~~");
+
+        image1.setImageBitmap(facility.getImage().get(0));
+
 
         return view;
     }
