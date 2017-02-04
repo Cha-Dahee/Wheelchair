@@ -28,6 +28,14 @@
                 android:textSize="25sp"
                 android:textColor="@android:color/black"/>
 
+            <Button
+                android:layout_width="78dp"
+                android:layout_height="34dp"
+                android:layout_gravity="right"
+                android:textColor="@android:color/white"
+                android:id="@+id/write"
+                android:text="WRITE"
+                android:background="@drawable/shape"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/textView2"
-                android:layout_margin="@dimen/activity_vertical_margin" />
+                android:textColor="@android:color/black"/>
 
         </LinearLayout>
     </ScrollView>
