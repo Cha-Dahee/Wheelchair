@@ -8,10 +8,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+
+import static org.milal.wheeliric.R.id.write;
 
 public class ReviewFragment extends Fragment {
 
@@ -25,12 +29,14 @@ public class ReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_review, container, false);
 
         TextView textView1 = (TextView) view.findViewById(R.id.textView1);
         TextView textView2 = (TextView) view.findViewById(R.id.textView2);
 
         ImageView image1 = (ImageView) view.findViewById(R.id.image1);
+
+        Button button = (Button) view.findViewById(write);
 
         facility = new Facility();
         facility.setName(getArguments().getString("name"));
@@ -42,6 +48,13 @@ public class ReviewFragment extends Fragment {
         facility.setImage(bitmap);
 
         textView1.setText(facility.getName());
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "리뷰를 쓸거얌", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         image1.setImageBitmap(facility.getImage().get(0));
         textView2.setText("★★★★☆    우와 짱짱이에여~~ 너무 좋아여~~");
 
