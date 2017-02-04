@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SearchTest.iml" filepath="$PROJECT_DIR$/SearchTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/picasso-2.3.3_f65eddfaf9de661652d2a42a78416f0d8c19f78e/picasso-2.3.3_f65eddfaf9de661652d2a42a78416f0d8c19f78e.iml" filepath="$PROJECT_DIR$/picasso-2.3.3_f65eddfaf9de661652d2a42a78416f0d8c19f78e/picasso-2.3.3_f65eddfaf9de661652d2a42a78416f0d8c19f78e.iml" />
+    </modules>
+  </component>
+</project>

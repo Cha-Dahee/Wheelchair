@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('picasso-2.3.3_f65eddfaf9de661652d2a42a78416f0d8c19f78e.jar'))

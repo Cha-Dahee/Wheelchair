@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "120231294599",
+    "project_id": "wheeliric"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120231294599:android:2faf64f87a41ed50",
+        "android_client_info": {
+          "package_name": "com.example.lg.searchimage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120231294599-845tm5t2fqjasak7al5pf51omthdnbfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lg.searchimage",
+            "certificate_hash": "E2EF0EE9862AE25960737916F232224D7884CC86"
+          }
+        },
+        {
+          "client_id": "120231294599-u10visdcmfsohjogrufi03vcppdjft5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgLkmZRMk3XDHdjPTebQgpuW3b6x0HwxA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
