@@ -1,9 +1,6 @@
 package org.milal.wheeliric;
 
-;;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +17,10 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import static org.milal.wheeliric.R.id.image1;
+import static org.milal.wheeliric.R.id.image2;
+import static org.milal.wheeliric.R.id.image3;
 
 public class InfoFragment extends Fragment {
 
@@ -42,8 +43,6 @@ public class InfoFragment extends Fragment {
     private ArrayList<String> list; //listview에 연결할 모델 객체
     private ArrayAdapter<String> adapter;
 
-
-
     public InfoFragment() {
 
     }
@@ -63,17 +62,17 @@ public class InfoFragment extends Fragment {
         TextView textView2 = (TextView) view.findViewById(R.id.textView2);
         TextView textView3 = (TextView) view.findViewById(R.id.textView3);
 
-        //네이버, 다음 카페 및 블로그 리스트 정보
+        //다음 카페 리스트 정보
         ListView listView1 = (ListView) view.findViewById(R.id.listView1);
-        list = new ArrayList<String>();
-        //리스트뷰에 모델객체를 연결할 아답타 객체
+        TextView textView4 = (TextView) view.findViewById(R.id.textView4);
+
+        list = new ArrayList<String>(); //리스트뷰에 모델객체를 연결할 아답타 객체
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
 
-        //리스트뷰에 아답타 연결하기
-        listView1.setAdapter(adapter);
-        listView1.setDivider(new ColorDrawable(Color.RED));
-        listView1.setDividerHeight(3); //구분선
-        listView1.setOnItemClickListener(itemClickListenerOfSearchResult);
+        //네이버 카페 및 블로그 리스트 정보
+        TextView textView5 = (TextView) view.findViewById(R.id.textView5);
+
+
 
 
         geo = new TMapGeoAPI(view.getContext());
@@ -131,6 +130,7 @@ public class InfoFragment extends Fragment {
         list.clear();//새 액티비티마다 데이터 쌓임 방지(필요?)
         DaumCafeList thread = new DaumCafeList(facility.getName());
         thread.execute();
+
         try {
             for(int i=0; i < thread.get().size(); i++)
                 this.list.add(thread.get().get(i));
@@ -141,9 +141,22 @@ public class InfoFragment extends Fragment {
         //모델의 데이터가 바뀌었다고 아답타 객체에 알린다.
         adapter.notifyDataSetChanged();
 
+
         textView1.setText(facility.getName());
         textView2.setText(facility.getVicinity());
         textView3.setText(facility.getInfo());
+
+        //리스트뷰에 아답타 연결하기
+        listView1.setAdapter(adapter);
+        listView1.setDividerHeight(3); //구분선
+        listView1.setOnItemClickListener(itemClickListenerOfSearchResult);
+
+        if(list.size() == 0)
+            textView4.setText("검색결과가 없습니다.");
+
+        //하은이 네이버 정보 여기
+        //textView5.setText("");
+        //if(검색 결과 없으면) textView5.setText("검색결과가 없습니다.");
 
         return view;
     }
