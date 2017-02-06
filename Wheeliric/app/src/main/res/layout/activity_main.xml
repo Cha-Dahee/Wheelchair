@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:id="@+id/main">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,9 +14,9 @@
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@android:color/white"
         android:textAlignment="center"
-        android:background="@android:color/darker_gray"
+        android:background="#e88091"
         android:textSize="40sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_marginTop="50dp"
@@ -68,7 +69,7 @@
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@android:color/darker_gray"
+        android:background="#e88091"
         android:gravity="center_vertical|center_horizontal" />
 
     <TextView
@@ -90,7 +91,11 @@
         android:textColor="#000000"
         android:hint="예) 양덕동 스타벅스"
         android:lineSpacingExtra="1.2sp"
-        android:lines="1" />
+        android:lines="1"
+        android:textCursorDrawable="@android:color/darker_gray"
+        android:backgroundTint="#e88091"
+        android:inputType="text"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:layout_height="wrap_content"

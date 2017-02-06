@@ -1,15 +1,21 @@
 package org.milal.wheeliric;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -35,14 +41,28 @@ public class MainActivity extends AppCompatActivity {
         final Button btn2 = (Button) findViewById(R.id.goMap2);
         final EditText text = (EditText) findViewById(R.id.search);
 
+        text.setHighlightColor(Color.parseColor("#e88091"));
+        text.setLinkTextColor(Color.parseColor("#e88091"));
+        text.setOnEditorActionListener(new TextView.OnEditorActionListener(){
 
-        text.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == event.KEYCODE_ENTER){
-                    return true;
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch(actionId){
+                    case EditorInfo.IME_ACTION_DONE:
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
+                    break;
                 }
                 return false;
+            }
+        });
+
+        LinearLayout main = (LinearLayout) findViewById(R.id.main);
+        main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
             }
         });
 
