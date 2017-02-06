@@ -119,24 +119,22 @@ public class InfoFragment extends Fragment {
             e.printStackTrace();
         }
 
-        //list.clear();//새 액티비티마다 데이터 쌓임 방지(필요?)
+        list.clear();//새 액티비티마다 데이터 쌓임 방지(필요?)
         DaumCafeList thread = new DaumCafeList(facility.getName());
         thread.execute();
         try {
-            this.list = thread.get();
+            for(int i=0; i < thread.get().size(); i++)
+                this.list.add(thread.get().get(i));
+            //this.list = thread.get(); 왜 위에는 되고 밑에는 안될까.
         }catch(Exception e){
             e.printStackTrace();
         }
         //모델의 데이터가 바뀌었다고 아답타 객체에 알린다.
         adapter.notifyDataSetChanged();
-        Log.d("test11111",this.list.get(0));
-        Log.d("how many?",String.valueOf(adapter.getCount()));
-
 
         textView1.setText(facility.getName());
         textView2.setText(facility.getVicinity());
         textView3.setText(facility.getInfo());
-
 
         return view;
     }

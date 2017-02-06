@@ -120,13 +120,8 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayList<String>> {
                             continue;
                         String title = tmp.getString("title");
                         String link = tmp.getString("link");
-                        Log.d("listTest",cafeName+" "+title+" "+link);
                         list.add(title + "\n" + link + "\n" + cafeName);
-                        Log.d("testInt:","-_-"+String.valueOf(list.size()));
-                        Log.d("test0:",list.get(0));
                     }
-                    //모델의 데이터가 바뀌었다고 아답타 객체에 알린다.
-                    //adapter.notifyDataSetChanged();
                 }catch (Exception e) {
 
                 }
