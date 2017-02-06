@@ -1,5 +1,6 @@
 package org.milal.wheeliric;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,8 @@ public class NewActivity extends AppCompatActivity{
         viewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setTabTextColors(Color.GRAY, (Color.parseColor("#e88091")));
+        tabLayout.setSelectedTabIndicatorColor((Color.parseColor("#e88091")));
         tabLayout.setupWithViewPager(viewPager);
     }
 }

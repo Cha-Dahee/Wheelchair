@@ -86,7 +86,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if(mList.isEmpty()){
             Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
-            finish();
         } else {
             for (Facility i : mList) {
                 LatLng latLng = new LatLng(i.getLat(), i.getLng());

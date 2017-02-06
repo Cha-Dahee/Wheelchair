@@ -25,6 +25,8 @@ public class InfoFragment extends Fragment {
     final static String ULSAN = "ULSAN";
     final static String GYEONGGI = "GYEONGGI";
     final static String TOUR = "TOUR";
+    final static String GWANGJOO = "GWANGJOO";
+    final static String GWANGJOO_FOOD = "GWANGJOO_FOOD";
 
     private TMapGeoAPI geo;
     private JsoupParser parser;

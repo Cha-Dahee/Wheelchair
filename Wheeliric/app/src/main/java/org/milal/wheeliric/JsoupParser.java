@@ -28,6 +28,8 @@ public class JsoupParser extends AsyncTask<String, Void, Facility>{
     final static String ULSAN = "ULSAN";
     final static String GYEONGGI = "GYEONGGI";
     final static String TOUR = "TOUR";
+    final static String GWANGJOO = "GWANGJOO";
+    final static String GWANGJOO_FOOD = "GWANGJOO_FOOD";
 
     private String URL = "";
     private String CODE = "";
