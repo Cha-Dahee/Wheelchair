@@ -1,17 +1,25 @@
 package org.milal.wheeliric;
 
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class InfoFragment extends Fragment {
@@ -29,6 +37,11 @@ public class InfoFragment extends Fragment {
     private TMapGeoAPI geo;
     private JsoupParser parser;
     private Facility facility;
+
+    private ArrayList<String> list; //listview에 연결할 모델 객체
+    private ArrayAdapter<String> adapter;
+
+
 
     public InfoFragment() {
 
@@ -51,6 +64,16 @@ public class InfoFragment extends Fragment {
 
         //네이버, 다음 카페 및 블로그 리스트 정보
         ListView listView1 = (ListView) view.findViewById(R.id.listView1);
+        list = new ArrayList<String>();
+        //리스트뷰에 모델객체를 연결할 아답타 객체
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list);
+
+        //리스트뷰에 아답타 연결하기
+        listView1.setAdapter(adapter);
+        listView1.setDivider(new ColorDrawable(Color.RED));
+        listView1.setDividerHeight(3); //구분선
+        listView1.setOnItemClickListener(itemClickListenerOfSearchResult);
+
 
         geo = new TMapGeoAPI(view.getContext());
         parser = new JsoupParser();
@@ -96,13 +119,28 @@ public class InfoFragment extends Fragment {
             e.printStackTrace();
         }
 
+        //list.clear();//새 액티비티마다 데이터 쌓임 방지(필요?)
+        DaumCafeList thread = new DaumCafeList(facility.getName());
+        thread.execute();
+        try {
+            this.list = thread.get();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //모델의 데이터가 바뀌었다고 아답타 객체에 알린다.
+        adapter.notifyDataSetChanged();
+        Log.d("test11111",this.list.get(0));
+        Log.d("how many?",String.valueOf(adapter.getCount()));
+
+
         textView1.setText(facility.getName());
         textView2.setText(facility.getVicinity());
         textView3.setText(facility.getInfo());
-        //listView1.setAdapter(...);
+
 
         return view;
     }
+
 
     public static InfoFragment newInstance(LatLng latLng, String name, String category){
         Bundle args = new Bundle();
@@ -114,5 +152,16 @@ public class InfoFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    private AdapterView.OnItemClickListener itemClickListenerOfSearchResult = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View clickedView, int position, long id) {
+            String str = ((TextView)clickedView).getText().toString();
+            String cafeLink = str.split("\n")[1];
+            Intent CafePosting = new Intent(Intent.ACTION_VIEW, Uri.parse(cafeLink));
+            // Intent CafePosting = new Intent(getApplicationContext(), ShowCafePosting.class);
+            startActivity(CafePosting);
+        }
+    };
 
 }

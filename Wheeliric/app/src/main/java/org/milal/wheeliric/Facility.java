@@ -22,6 +22,7 @@ public class Facility {
     private LatLng latLng;
     private List<Bitmap> image;
 
+
     public Facility(){
         info = "";
         image = new ArrayList<>();
@@ -54,4 +55,6 @@ public class Facility {
     public double getLat(){return lat;}
     public double getLng(){return lng;}
     public LatLng getLatLng(){return latLng;}
+
+
 }

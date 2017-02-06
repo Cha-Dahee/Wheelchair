@@ -10,8 +10,13 @@ package="org.milal.wheeliric">
 <uses-permission android:name="android.permission.READ_OWNER_DATA"></uses-permission>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
-<application android:allowBackup="true" android:icon="@drawable/icon" android:label="@string/app_name"
-    android:supportsRtl="true" android:theme="@style/AppTheme">
+<application
+    android:allowBackup="true"
+    android:icon="@drawable/icon"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:name="android.support.multidex.MultiDexApplication">
     <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBLCzWp7yh-mkfoZ5-Mwt9iID8la5_rvxM" />
 
     <activity android:name=".MapsActivity" android:label="@string/app_name"></activity>
