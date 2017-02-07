@@ -137,8 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/textView5"
-                android:layout_margin="16dp"
-                android:textColor="@android:color/black"/>
+                android:layout_margin="32dp" />
 
         </LinearLayout>
     </ScrollView>

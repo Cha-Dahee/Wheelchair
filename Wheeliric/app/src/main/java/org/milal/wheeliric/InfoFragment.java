@@ -18,10 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static org.milal.wheeliric.R.id.image1;
-import static org.milal.wheeliric.R.id.image2;
-import static org.milal.wheeliric.R.id.image3;
-
 public class InfoFragment extends Fragment {
 
     private static final int NEW_ADDRESS = 0;
@@ -157,6 +153,7 @@ public class InfoFragment extends Fragment {
         //하은이 네이버 정보 여기
         //textView5.setText("");
         //if(검색 결과 없으면) textView5.setText("검색결과가 없습니다.");
+        textView5.setText("검색결과가 없습니다.");
 
         return view;
     }
