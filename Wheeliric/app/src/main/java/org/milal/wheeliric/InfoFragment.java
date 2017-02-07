@@ -98,7 +98,15 @@ public class InfoFragment extends Fragment {
                 info = parser.execute(ULSAN, facility.getName()).get();
             } else if(facility.getVicinity().contains("경기")){
                 info = parser.execute(GYEONGGI, facility.getName()).get();
-            } */ else{
+            } */ else if(facility.getVicinity().contains("광주")){
+                info = parser.execute(GWANGJOO_FOOD, facility.getName()).get();
+
+                /*if(info.getInfo().equals("검색결과가 없습니다.")){
+                    JsoupParser parser2 = new JsoupParser();
+                    info = parser2.execute(GWANGJOO_FOOD, facility.getName()).get();
+                }*/
+
+            } else {
                 info = parser.execute(TOUR, facility.getName()).get();
                 flag = true;
             }

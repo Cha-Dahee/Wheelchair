@@ -12,8 +12,10 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by Yoojung on 2017-02-01.
@@ -89,7 +91,7 @@ public class JsoupParser extends AsyncTask<String, Void, Facility>{
                         bitmap[0] = BitmapFactory.decodeStream(in);
                         facility.setImage(bitmap[0]);
 
-                        //메인 사진
+                        //기타 사진
                         titles = doc.select("div.image_list_view");
                         node = titles.select("a[href]");
 
@@ -383,6 +385,148 @@ public class JsoupParser extends AsyncTask<String, Void, Facility>{
 
                         for(Element e : node){
                             output += e.text();
+                            output += "\n";
+                        }
+                    }
+                    facility.setInfo(output);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case GWANGJOO_FOOD:
+                //광주 음식점
+                URL = "https://www.gwangju.go.kr/contentsView.do?menuId=gwangju0410042600";
+
+                try {
+                    doc = Jsoup.connect(URL).get();
+                    titles = doc.select("tbody");
+                    node = titles.select("tr");
+
+                    Log.d("tbody", node.first().text());
+
+                    for(Element e : node){
+                        titles = e.select("td");
+                        String compare = titles.get(1).text();
+
+                        Log.d("compare", compare);
+                        if(compare.contains(FACILITY)){
+                            output = "주  소 : " + titles.get(2).text() + "\n";
+                            output += "전화번호 : " + titles.get(3).text() + "\n";
+                            output += "주 메뉴 : " + titles.get(4).text() + "\n";
+                            output += "업  태 : " + titles.get(5).text() + "\n";
+                            output += "장애인 이용가능 : " + titles.get(6).text();
+
+                            if(titles.get(6).text().equals("○"))
+                                output += "(장애인 혼자 이용 가능업소)\n";
+                            else if(titles.get(6).text().equals("△"))
+                                output += "(동반자 도움으로 이용이 가능한 업소 ※화장실 출입이 불가할 수 있음)\n";
+
+                            break;
+                        }
+                        else
+                        {
+                            output = "검색결과가 없습니다.";
+                            Log.d("output", output);
+                        }
+                    }
+                    facility.setInfo(output);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case GWANGJOO :
+                //접속 안됨;;
+                try {
+                    FACILITY = URLEncoder.encode(FACILITY, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                URL = "http://편한세상.org/ew_list.php?key=&sub_key=&sub_cate=&option=&sb=&sbmode=sbmode&setext=" + FACILITY;
+
+                try {
+                    doc = Jsoup.connect(URL).get();
+
+                    titles = doc.select("div.container-fluid");
+                    node = titles.get(2).select("td[colspan=11]");
+                    output = node.first().text();
+                    Log.d("output2td", output);
+
+                    if(output.equals("등록된 내용이 없습니다.")) {
+                        output = "검색결과가 없습니다.";
+                    } else {
+                        //검색 링크
+                        titles = doc.select("div.row");
+                        node = titles.select("div[style=margin-bottom: 15px;]");
+
+                        titles = node.select("a[href]");
+                        output = titles.first().attr("href");
+                        output = output.substring(1);
+
+                        Log.d("substring", output);
+
+                        URL = "http://편한세상.org" + output;
+
+                        doc = Jsoup.connect(URL).get();
+
+                        //사진
+                        titles = doc.select("ui#inner_list");
+                        node = titles.select("a[href]");
+
+                        for (Element e : node) {
+                            output = e.attr("href");
+                            output = output.substring(1);
+                            URL Iurl = new URL("http://http://편한세상.org" + output);
+                            conn = (HttpURLConnection) Iurl.openConnection();
+                            conn.setDoInput(true);
+                            conn.connect();
+                            in = conn.getInputStream();
+                            bitmap[0] = BitmapFactory.decodeStream(in);
+                            facility.setImage(bitmap[0]);
+                        }
+
+                        //시설 정보
+                        titles = doc.select("table.table.fontoption");
+                        node = titles.select("tr");
+                        node.first().remove();
+
+                        output = "";
+                        for (Element e : node) {
+                            titles = e.select("h5");
+                            output += titles.first().text() + " : ";
+                            output += titles.last().text() + "\n";
+                        }
+
+                        titles = doc.select("div.col-md-12");
+                        titles.first().remove();
+                        titles.first().remove();
+                        titles.last().remove();
+
+                        node = titles.first().select("h2");
+                        output += node.text() + " : ";
+                        node = titles.first().select("strong");
+
+                        for (Element e : node) {
+                            output += e.text() + ", ";
+                        }
+                        output += "\n";
+
+                        node = titles.last().select("h2");
+                        output += node.text() + " : ";
+
+                        titles = doc.select("div.col-md-4");
+                        node = titles.select("tr");
+
+                        for (Element e : node) {
+                            titles = e.select("td");
+                            titles.first().remove();
+
+                            output += titles.first().text();
+                            if (titles.last().select("img").attr("src").contains("ok"))
+                                output += " ○";
+                            else
+                                output += " Χ";
                             output += "\n";
                         }
                     }
