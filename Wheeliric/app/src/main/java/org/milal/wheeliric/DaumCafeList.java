@@ -119,6 +119,7 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayList<String>> {
                         if(!(cafeName.equalsIgnoreCase("휠체어배낭여행(장애인여행)")||cafeName.equalsIgnoreCase("휠체어로 세계로...")))
                             continue;
                         String title = tmp.getString("title");
+                        title = removeHtmlTag(title);
                         String link = tmp.getString("link");
                         list.add(title + "\n" + link + "\n" + cafeName);
                     }
@@ -133,4 +134,13 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayList<String>> {
                 break;
         }
     }
+
+    private String removeHtmlTag(String content) {
+
+        content = content.replaceAll("&lt;b&gt;", " ");
+        content = content.replaceAll("&lt;/b&gt;", " ");
+
+        return content;
+    }
+
 }
