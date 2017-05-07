@@ -3,8 +3,8 @@ package org.milal.wheeliric;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -29,6 +31,7 @@ public class Main2Activity extends AppCompatActivity {
     String choice_do2 = "";
     String line = "";
     StringBuilder address;
+    static public Boolean ecch = false; //exactly checked
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class Main2Activity extends AppCompatActivity {
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner4);
         final Button btn2 = (Button) findViewById(R.id.goMap2);
         final EditText text = (EditText) findViewById(R.id.search);
+
+        final CheckBox cb = (CheckBox)findViewById(R.id.ecsearch);//하은
+        cb.setText("정확히 일치");
 
         text.setHighlightColor(Color.parseColor("#e88091"));
         text.setLinkTextColor(Color.parseColor("#e88091"));
@@ -366,6 +372,17 @@ public class Main2Activity extends AppCompatActivity {
                 else{
                     Toast.makeText(getApplicationContext(), "장소를 입력 후 검색해 주세요", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                    ecch = true;
+                else
+                    ecch = false;
             }
         });
     }

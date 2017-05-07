@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static org.milal.wheeliric.Main2Activity.ecch;
+
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private TMapPoiAPI places;
     List<Facility> mList = null;
     String address = "";
+    Boolean m = true; //검색값 확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,22 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 // Marker item =
                 googleMap.addMarker(markerOptions);
                 //pMarker.add(item);
+
+                //입력값과 정확히 매칭되는 상호명이 있을 경우 stop
+                if(ecch) {
+                    String[] arr = address.split(" ");
+                    if(i.getName().equals(arr[2])) {
+                        m = false;
+                        break;
+                    }
+                }
             }
+
+            if(ecch && m==true ) {
+                Toast.makeText(getApplicationContext(), " 정확히 일치하는 검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
             LatLng latLng = mList.get(0).getLatLng();
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
