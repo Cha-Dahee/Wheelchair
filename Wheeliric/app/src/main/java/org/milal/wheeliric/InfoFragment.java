@@ -1,6 +1,5 @@
 package org.milal.wheeliric;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,12 +39,9 @@ public class InfoFragment extends Fragment {
 
     private GridView gridView;
     private Tensorflow tensorflow;
+    private DaumCafeList thread;
 
-    ProgressDialog progressDialog;
-
-    public InfoFragment() {
-
-    }
+    public InfoFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +49,6 @@ public class InfoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         gridView = (GridView) view.findViewById(R.id.gridView);
-        progressDialog = new ProgressDialog(getActivity());
 
         ImageView image1 = (ImageView) view.findViewById(R.id.image1);
         ImageView image2 = (ImageView) view.findViewById(R.id.image2);
@@ -71,16 +66,29 @@ public class InfoFragment extends Fragment {
         //네이버 카페 및 블로그 리스트 정보
         TextView textView5 = (TextView) view.findViewById(R.id.textView5);
 
-        Hparser = new HTMLParser();
+        Hparser = new HTMLParser(getActivity());
         images = new String[100];
         urls = new String[100];
 
-        geo = new TMapGeoAPI(getActivity());
         facility = new Facility();
         facility.setName(getArguments().getString("name"));
         facility.setCategory(getArguments().getString("category"));
         facility.setLat(getArguments().getDouble("latitude"));
         facility.setLng(getArguments().getDouble("longitude"));
+
+        geo = new TMapGeoAPI(getActivity());
+        try {
+            facility.setVicinity(geo.execute(facility.getLat(), facility.getLng()).get()[NEW_ADDRESS]);
+            facility.setInfo("검색결과가 없습니다.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        textView1.setText(facility.getName());
+        textView2.setText(facility.getVicinity());
+        textView3.setText(facility.getInfo());
 
         try {
             ArrayList<URLObject> list = Hparser.execute(facility.getName()).get();
@@ -97,19 +105,15 @@ public class InfoFragment extends Fragment {
         tensorflow = new Tensorflow(getActivity(), gridView);
         tensorflow.execute(images, urls);
 
-        //Jparser = new JsoupParser();
+        /*
+        Jparser = new JsoupParser();
         try {
-            //Facility info;
+            Facility info;
 
             //TMapGeoAPI로 부터 주소를 받아옴(옛주소, 신주소 선택 가능)
             facility.setVicinity((geo.execute(facility.getLat(), facility.getLng()).get())[NEW_ADDRESS]);
             facility.setInfo("검색결과가 없습니다.");
 
-            textView1.setText(facility.getName());
-            textView2.setText(facility.getVicinity());
-            textView3.setText(facility.getInfo());
-
-            /*
             Boolean flag = false;
 
 
@@ -124,7 +128,7 @@ public class InfoFragment extends Fragment {
                 info = parser.execute(ULSAN, facility.getName()).get();
             } else if(facility.getVicinity().contains("경기")){
                 info = parser.execute(GYEONGGI, facility.getName()).get();
-            } */ /*else if(facility.getVicinity().contains("광주")){
+            } *//* else if(facility.getVicinity().contains("광주")){
                 info = Jparser.execute(GWANGJOO_FOOD, facility.getName()).get();
 
                 /*if(info.getInfo().equals("검색결과가 없습니다.")){
@@ -151,21 +155,18 @@ public class InfoFragment extends Fragment {
                 image1.setImageBitmap(facility.getImage().get(0));
                 image2.setImageBitmap(facility.getImage().get(1));
                 image3.setImageBitmap(facility.getImage().get(2));
-            }*/
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        DaumCafeList thread = new DaumCafeList(getActivity(), listView, textView4, facility.getName());
+        thread = new DaumCafeList(getActivity(), listView, textView4, facility.getName());
         thread.execute();
 
-        //하은이 네이버 정보 여기
-        //textView5.setText("");
-        //if(검색 결과 없으면) textView5.setText("검색결과가 없습니다.");
+        //네이버 정보
         textView5.setText("검색결과가 없습니다.");
-
         return view;
     }
 

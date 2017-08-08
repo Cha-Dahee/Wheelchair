@@ -1,5 +1,7 @@
 package org.milal.wheeliric;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.json.JSONException;
@@ -21,6 +23,30 @@ import java.util.ArrayList;
  */
 
 public class HTMLParser extends AsyncTask<String, Void, ArrayList<URLObject>>{
+
+    private ProgressDialog progressDialog;
+    private Context context;
+
+    public HTMLParser(Context context){
+        this.context = context;
+        progressDialog = new ProgressDialog(context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("로딩중입니다..");
+        progressDialog.show();
+
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<URLObject> result) {
+        progressDialog.dismiss();
+        super.onPostExecute(result);
+    }
 
     @Override
     protected ArrayList<URLObject> doInBackground(String... params){

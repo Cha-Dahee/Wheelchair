@@ -47,6 +47,7 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
     @Override
     protected void onPostExecute(String[] result) {
         progressDialog.dismiss();
+
         super.onPostExecute(result);
     }
 

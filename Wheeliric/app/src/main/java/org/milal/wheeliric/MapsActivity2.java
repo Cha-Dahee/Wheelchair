@@ -119,6 +119,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 } else{
                     intent.putExtra("category", "null");
                 }
+
                 startActivity(intent);
             }
         });

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.view.ViewGroup;
 import android.widget.GridView;
 
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
     private static final String LABEL_FILE = "file:///android_asset/imagenet_comp_graph_label_strings.txt";
 
     private static final int ITEM_NUM = 12;
+    private static final int ROW_NUM = 3;
 
     private Context context;
     private Classifier classifier;
@@ -66,6 +68,16 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
         result.notifyDataSetChanged();
         gridView.invalidate();
         gridView.setAdapter(result);
+        int height = ITEM_NUM / ROW_NUM;
+
+        if((ITEM_NUM % ROW_NUM) != 0)
+            height++;
+
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = (INPUT_SIZE + 25) * height * 2;
+
+        gridView.setLayoutParams(params);
+        gridView.requestLayout();
 
         super.onPostExecute(result);
     }
