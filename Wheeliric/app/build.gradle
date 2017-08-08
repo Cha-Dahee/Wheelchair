@@ -26,7 +26,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('lib/com.skp.Tmap_1.0.44.jar')
-    compile files('lib/jsoup-1.10.2.jar')
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:appcompat-v7:25.1.0'
@@ -34,4 +33,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.0'
+    compile files('lib/libandroid_tensorflow_inference_java.jar')
+    compile files('lib/jsoup-1.10.3.jar')
+    compile 'org.tensorflow:libtensorflow_jni:1.3.0-rc2'
+    compile 'org.tensorflow:libtensorflow:1.3.0-rc2'
 }

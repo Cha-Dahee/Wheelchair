@@ -26,11 +26,28 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
     private Context mContext;
     private TMapData tmapdata;
     private TMapAddressInfo addressInfo;
-    private ProgressDialog asyncDialog;
+    private ProgressDialog progressDialog;
     String address[];
 
     public TMapGeoAPI(Context context){
         mContext = context;
+        progressDialog = new ProgressDialog(mContext);
+    }
+
+    @Override
+    protected void onPreExecute() {
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("로딩중입니다..");
+        progressDialog.show();
+
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(String[] result) {
+        progressDialog.dismiss();
+        super.onPostExecute(result);
     }
 
     @Override

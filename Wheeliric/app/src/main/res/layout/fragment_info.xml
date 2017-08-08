@@ -37,6 +37,19 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"/>
 
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:id="@+id/gridView"
+                android:numColumns="3"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing="25dp">
+            </GridView>
+
             <TextView
                 android:layout_gravity="left"
                 android:layout_height="wrap_content"

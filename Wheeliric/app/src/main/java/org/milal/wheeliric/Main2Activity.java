@@ -368,8 +368,7 @@ public class Main2Activity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MapsActivity2.class);
                     intent.putExtra("address", address.toString());
                     startActivity(intent);
-                }
-                else{
+                } else{
                     Toast.makeText(getApplicationContext(), "장소를 입력 후 검색해 주세요", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -1,8 +1,12 @@
 package org.milal.wheeliric;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,22 +19,48 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class DaumCafeList extends AsyncTask<Void, Void, ArrayList<String>> {
+public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
     String url;
     String keyWord;
     private ArrayList<String> list;
 
-    public ArrayList<String> getList(){
-        return list;
+    private ProgressDialog progressDialog;
+    private Context context;
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+
+    public DaumCafeList(Context context, ListView listView, String keyWord){
+        this.context = context;
+        this.keyWord = keyWord;
+        this.listView = listView;
+        progressDialog = new ProgressDialog(context);
+        adapter = null;
     }
 
-    public DaumCafeList(String keyWord){
-        this.keyWord = keyWord;
+    @Override
+    protected void onPreExecute() {
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("로딩중입니다..");
+        progressDialog.show();
+
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(ArrayAdapter<String> result) {
+        progressDialog.dismiss();
+        result = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, list);
+        result.notifyDataSetChanged();
+        listView.invalidate();
+        listView.setAdapter(result);
+
+        super.onPostExecute(result);
     }
 
     //스레드 본체
     @Override
-    protected ArrayList<String> doInBackground(Void... voids) {
+    protected ArrayAdapter<String> doInBackground(Void... voids) {
         //한글이 깨지지 않게 하기 위해
         try {
             String encodedK = "\"" + URLEncoder.encode(keyWord, "utf-8") + "\"+";
@@ -87,11 +117,7 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayList<String>> {
         }finally{
             conn.disconnect(); //접속 종료
         }
-        return list;
-    }
-
-    protected void onPostExecute (ArrayList<String> returnedList){
-
+        return adapter;
     }
 
     protected void getCafeInfo(android.os.Message msg){
