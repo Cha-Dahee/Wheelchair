@@ -51,6 +51,7 @@ class PagerAdapter extends FragmentPagerAdapter {
         this.name = name;
         this.category = category;
     }
+
     @Override
     public Fragment getItem(int position) {
         switch(position){

@@ -2,11 +2,16 @@ package org.milal.wheeliric;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,12 +32,14 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
     private ProgressDialog progressDialog;
     private Context context;
     private ListView listView;
+    private TextView textView;
     private ArrayAdapter<String> adapter;
 
-    public DaumCafeList(Context context, ListView listView, String keyWord){
+    public DaumCafeList(Context context, ListView listView, TextView textView, String keyWord){
         this.context = context;
         this.keyWord = keyWord;
         this.listView = listView;
+        this.textView = textView;
         progressDialog = new ProgressDialog(context);
         adapter = null;
     }
@@ -50,8 +57,15 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
     @Override
     protected void onPostExecute(ArrayAdapter<String> result) {
         progressDialog.dismiss();
-        result = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, list);
-        result.notifyDataSetChanged();
+
+        if(list.size() != 0) {
+            result = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, list);
+            result.notifyDataSetChanged();
+        } else{
+            textView.setText("검색결과가 없습니다.");
+        }
+        listView.setDividerHeight(3);
+        listView.setOnItemClickListener(itemClickListenerOfSearchResult);
         listView.invalidate();
         listView.setAdapter(result);
 
@@ -168,5 +182,16 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
 
         return content;
     }
+
+    private AdapterView.OnItemClickListener itemClickListenerOfSearchResult = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View clickedView, int position, long id) {
+            String str = ((TextView)clickedView).getText().toString();
+            String cafeLink = str.split("\n")[1];
+            Intent CafePosting = new Intent(Intent.ACTION_VIEW, Uri.parse(cafeLink));
+            // Intent CafePosting = new Intent(getApplicationContext(), ShowCafePosting.class);
+            context.startActivity(CafePosting);
+        }
+    };
 
 }

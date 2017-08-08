@@ -1,5 +1,6 @@
 package org.milal.wheeliric;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -24,13 +25,30 @@ import javax.xml.parsers.ParserConfigurationException;
 public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
 
     private static final String APIKey = "95376795-5b4e-31aa-8445-869968fe3d20";
-
+    private ProgressDialog progressDialog;
     Context mContext;
     List<TMapPOIItem> tList;
     List<Facility> mList;
 
     public TMapPoiAPI(Context context){
         mContext = context;
+        progressDialog = new ProgressDialog(context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("로딩중입니다..");
+        progressDialog.show();
+
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(List<Facility> result) {
+        progressDialog.dismiss();
+        super.onPostExecute(result);
     }
 
     @Override
