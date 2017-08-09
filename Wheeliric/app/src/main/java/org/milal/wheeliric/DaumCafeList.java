@@ -48,6 +48,7 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
     protected void onPreExecute() {
 
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("로딩중입니다..");
         progressDialog.show();
 
@@ -70,6 +71,14 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
         listView.setAdapter(result);
 
         super.onPostExecute(result);
+    }
+
+    @Override
+    protected void onCancelled(ArrayAdapter<String> result){
+        if(progressDialog != null)
+            progressDialog.dismiss();
+
+        super.onCancelled();
     }
 
     //스레드 본체

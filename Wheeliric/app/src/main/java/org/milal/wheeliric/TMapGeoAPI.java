@@ -39,6 +39,7 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
 
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("로딩중입니다..");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         super.onPreExecute();
@@ -49,6 +50,14 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
         progressDialog.dismiss();
 
         super.onPostExecute(result);
+    }
+
+    @Override
+    protected void onCancelled(String[] result){
+        if(progressDialog != null)
+            progressDialog.dismiss();
+
+        super.onCancelled();
     }
 
     @Override

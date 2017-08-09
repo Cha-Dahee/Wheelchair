@@ -36,6 +36,7 @@ public class HTMLParser extends AsyncTask<String, Void, ArrayList<URLObject>>{
     protected void onPreExecute() {
 
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("로딩중입니다..");
         progressDialog.show();
 
@@ -46,6 +47,14 @@ public class HTMLParser extends AsyncTask<String, Void, ArrayList<URLObject>>{
     protected void onPostExecute(ArrayList<URLObject> result) {
         progressDialog.dismiss();
         super.onPostExecute(result);
+    }
+
+    @Override
+    protected void onCancelled(ArrayList<URLObject> result){
+        if(progressDialog != null)
+            progressDialog.dismiss();
+
+        super.onCancelled();
     }
 
     @Override

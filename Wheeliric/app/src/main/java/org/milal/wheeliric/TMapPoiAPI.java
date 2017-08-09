@@ -40,6 +40,7 @@ public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
 
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("로딩중입니다..");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         super.onPreExecute();
@@ -49,6 +50,14 @@ public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
     protected void onPostExecute(List<Facility> result) {
         progressDialog.dismiss();
         super.onPostExecute(result);
+    }
+
+    @Override
+    protected void onCancelled(List<Facility> result){
+        if(progressDialog != null)
+            progressDialog.dismiss();
+
+        super.onCancelled();
     }
 
     @Override

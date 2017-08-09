@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * Created by Yoojung on 2017-08-03.
@@ -18,13 +17,13 @@ import android.widget.TextView;
 public class ImageGridAdapter extends BaseAdapter{
 
     Context context = null;
-    String[] description = null;
+    //String[] description = null;
     Bitmap[] bitmaps = null;
     String[] urls = null;
 
-    public ImageGridAdapter(Context context, String[] description, Bitmap[] bitmaps, String[] urls){
+    public ImageGridAdapter(Context context, Bitmap[] bitmaps, String[] urls){
         this.context = context;
-        this.description = description;
+        //this.description = description;
         this.bitmaps = bitmaps;
         this.urls = urls;
     }
@@ -52,8 +51,9 @@ public class ImageGridAdapter extends BaseAdapter{
 
         if(convertView == null) {
             grid = inflater.inflate(R.layout.simple_image, null);
+            /*
             TextView textView = (TextView) grid.findViewById(R.id.description);
-            textView.setText(description[position]);
+            textView.setText(description[position]);*/
 
             Bitmap bitmap = bitmaps[position];
             bitmap = Bitmap.createScaledBitmap(bitmap, 320, 240, false);
