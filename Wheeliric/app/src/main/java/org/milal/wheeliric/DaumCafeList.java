@@ -3,11 +3,13 @@ package org.milal.wheeliric;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -65,10 +67,20 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
         } else{
             textView.setText("검색결과가 없습니다.");
         }
-        listView.setDividerHeight(3);
+
+        if(list.size() == 1)
+            listView.setDivider(new ColorDrawable(0x000000));
+
         listView.setOnItemClickListener(itemClickListenerOfSearchResult);
         listView.invalidate();
         listView.setAdapter(result);
+
+        int height = list.size();
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = 150 * height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
 
         super.onPostExecute(result);
     }
@@ -129,8 +141,6 @@ public class DaumCafeList extends AsyncTask<Void, Void, ArrayAdapter<String>> {
             getCafeInfo(msg);
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-
             Log.e("post 전송중 에러!", e.getMessage());
             Message msg= new Message();
             msg.what=1; //실패

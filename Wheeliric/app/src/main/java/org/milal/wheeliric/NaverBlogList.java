@@ -3,6 +3,7 @@ package org.milal.wheeliric;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -72,7 +73,9 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
             textView.setText("검색결과가 없습니다.");
         }
 
-        listView.setDividerHeight(3);
+        if(blogresult.size() == 1)
+            listView.setDivider(new ColorDrawable(0x000000));
+
         listView.setOnItemClickListener(itemClickListenerOfSearchResult);
         listView.invalidate();
         listView.setAdapter(result);
@@ -119,9 +122,9 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
                     Log.v("obj", obj.getString("link"));
                     array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
                     array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
-                    bloglists.add( obj.getString("bloggerlink") + "/"+array[1]);
+                    bloglists.add(removeHtmlTag(obj.getString("title")) + "\n" + obj.getString("bloggerlink") + "/"+array[1]);
                 } else {
-                    bloglists.add(obj.getString("bloggerlink"));
+                    bloglists.add(removeHtmlTag(obj.getString("title")) + "\n" + obj.getString("bloggerlink"));
                 }
             }
 
@@ -139,9 +142,9 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
                 if(obj.getString("link").contains("http://blog.naver.com")) {
                     array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
                     array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
-                    bloglists_park.add(obj.getString("bloggerlink") + "/" + array[1]);
+                    bloglists_park.add(removeHtmlTag(obj.getString("title")) + "\n" + obj.getString("bloggerlink") + "/" + array[1]);
                 } else {
-                    bloglists_park.add(obj.getString("bloggerlink"));
+                    bloglists_park.add(removeHtmlTag(obj.getString("title")) + "\n" + obj.getString("bloggerlink"));
                 }
             }
 
@@ -151,7 +154,6 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
             for(i = 0; i < items_.length(); i++){
                 if(bloglist_[i].equals(bloglist)){
                     blogresult.add(bloglist_[i]);
-
                 }
                 if(blogresult.size()==5)
                     break;
@@ -217,11 +219,24 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
         return response;
     }
 
+    private String removeHtmlTag(String content) {
+
+        content = content.replaceAll("&lt;b&gt;", " ");
+        content = content.replaceAll("&lt;/b&gt;", " ");
+        content = content.replaceAll("<b>", " ");
+        content = content.replaceAll("</b>", " ");
+        content = content.replaceAll("&gt;", " ");
+        content = content.replaceAll("#", "");
+
+        return content;
+    }
+
     private AdapterView.OnItemClickListener itemClickListenerOfSearchResult = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View clickedView, int position, long id) {
             String str = ((TextView)clickedView).getText().toString();
-            Intent CafePosting = new Intent(Intent.ACTION_VIEW, Uri.parse(str));
+            String cafeLink = str.split("\n")[1];
+            Intent CafePosting = new Intent(Intent.ACTION_VIEW, Uri.parse(cafeLink));
             // Intent CafePosting = new Intent(getApplicationContext(), ShowCafePosting.class);
             context.startActivity(CafePosting);
         }

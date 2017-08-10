@@ -59,6 +59,39 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
             "window screen",
     };
 
+    private static final String[] notWords = {
+            "espresso",
+            "pizza",
+            "water bottle",
+            "trifle",
+            "menu",
+            "beer glass",
+            "ice cream",
+            "ice lolly",
+            "eggnog",
+            "coffee mug",
+            "orange",
+            "lemon",
+            "fig",
+            "pineapple",
+            "banana",
+            "jackfruit",
+            "custard apple",
+            "pomegranate",
+            "acorn",
+            "bottlecap",
+            "pop bottle",
+            "wine bottle",
+            "pill bottle",
+            "Crock Pot",
+            "perfume",
+            "hotdog",
+            "pizza",
+            "wooden spoon",
+            "saltshaker",
+            "chocolate sauce"
+    };
+
     private Context context;
     private Classifier classifier;
     private GridView gridView;
@@ -222,6 +255,11 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
 
         for(int i = 0; i < words.length; i++) {
             if (results.toString().contains(words[i])) {
+                for(int j = 0;  j < notWords.length; j++){
+                    if (results.toString().contains(notWords[j]))
+                        return false;
+                }
+
                 //description[position] = results.toString();
                 bitmaps[position] = temp;
                 webs[position] = url;

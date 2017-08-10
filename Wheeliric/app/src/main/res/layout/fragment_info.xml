@@ -148,7 +148,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:divider="#00000000"></ListView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:divider="@color/wallet_bright_foreground_holo_dark"
+                android:dividerHeight="1dp"></ListView>
 
             <TextView
                 android:id="@+id/textView4"
@@ -180,7 +183,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:divider="#00000000"></ListView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:divider="@color/wallet_bright_foreground_holo_dark"
+                android:dividerHeight="1dp"></ListView>
 
             <TextView
                 android:id="@+id/textView5"
