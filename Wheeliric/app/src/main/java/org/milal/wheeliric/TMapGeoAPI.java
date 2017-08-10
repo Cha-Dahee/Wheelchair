@@ -71,11 +71,11 @@ public class TMapGeoAPI extends AsyncTask<Double, Void, String[]>{
         address = new String[2];
 
         try {
-            addressInfo = tmapdata.reverseGeocoding(latitude, longitude, "A03");
-            address[NEW_ADDRESS] = addressInfo.strFullAddress;
-
-            addressInfo = tmapdata.reverseGeocoding(latitude, longitude, "A02");
-            address[OLD_ADDRESS] = addressInfo.strFullAddress;
+            String[] temp;
+            addressInfo = tmapdata.reverseGeocoding(latitude, longitude, "A10");
+            temp = addressInfo.strFullAddress.split(",");
+            address[NEW_ADDRESS] = temp[2];
+            address[OLD_ADDRESS] = temp[1];
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {

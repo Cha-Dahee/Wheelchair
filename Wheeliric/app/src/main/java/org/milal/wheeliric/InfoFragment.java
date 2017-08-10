@@ -43,7 +43,8 @@ public class InfoFragment extends Fragment {
     private GridView gridView2;
     private Tensorflow tensorflow;
     private Tensorflow tensorflow2;
-    private DaumCafeList thread;
+    private DaumCafeList daumCafeList;
+    private NaverBlogList naverBlogList;
 
     public InfoFragment() {}
 
@@ -87,7 +88,7 @@ public class InfoFragment extends Fragment {
 
         geo = new TMapGeoAPI(getActivity());
         try {
-            facility.setVicinity(geo.execute(facility.getLat(), facility.getLng()).get()[NEW_ADDRESS]);
+            facility.setVicinity(geo.execute(facility.getLat(), facility.getLng()).get()[OLD_ADDRESS]);
             facility.setInfo("검색결과가 없습니다.");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -99,8 +100,10 @@ public class InfoFragment extends Fragment {
         textView2.setText(facility.getVicinity());
         textView3.setText(facility.getInfo());
 
+        String[] address = facility.getVicinity().split(" ");
+
         try {
-            ArrayList<URLObject> list = Hparser.execute(facility.getVicinity() + facility.getName()).get();
+            ArrayList<URLObject> list = Hparser.execute(address[1] + " " + facility.getName()).get();
             for (int i = 0; i < list.size() && i < 100; i++) {
                 images[i] = list.get(i).getImage();
                 urls[i] = list.get(i).getUrl();
@@ -114,8 +117,13 @@ public class InfoFragment extends Fragment {
         tensorflow = new Tensorflow(getActivity(), gridView, hidden);
         tensorflow.execute(images, urls);
 
-        thread = new DaumCafeList(getActivity(), listView, textView4, facility.getName());
-        thread.execute();
+        daumCafeList = new DaumCafeList(getActivity(), listView, textView4, address[1] + " " + facility.getName());
+        daumCafeList.execute();
+
+        /*
+        naverBlogList = new NaverBlogList(getActivity(), listView2, textView5);
+        naverBlogList.execute(address[1] + " " + facility.getName());
+        */
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +135,6 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        //네이버 정보
-        textView5.setText("검색결과가 없습니다.");
         return view;
     }
 

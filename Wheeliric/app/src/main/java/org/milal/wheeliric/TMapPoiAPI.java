@@ -100,6 +100,7 @@ public class TMapPoiAPI extends AsyncTask<String, Void, List<Facility>>{
                     mAddress.append(" ").append(i.detailAddrName);
 
                 String vin = mAddress.toString();
+
                 mList.add(new Facility(name, category, vin, tLat, tLng));
                 mAddress.delete(0, mAddress.length());
             }

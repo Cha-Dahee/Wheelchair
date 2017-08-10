@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/textView5"
-                android:layout_margin="32dp" />
+                android:layout_margin="16dp" />
 
         </LinearLayout>
     </ScrollView>
