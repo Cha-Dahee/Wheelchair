@@ -16,82 +16,80 @@
         android:fillViewport="true">
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="1"
-            android:id="@+id/linear">
+            android:weightSum="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/textView1"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="@android:color/black" />
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"/>
-
-            <GridView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/gridView"
-                android:numColumns="3"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:horizontalSpacing="10dp"
-                android:verticalSpacing="20dp">
-            </GridView>
-
-            <GridView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/gridView2"
-                android:numColumns="3"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:horizontalSpacing="10dp"
-                android:verticalSpacing="20dp"
-                android:visibility="gone">
-            </GridView>
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray" />
+
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="10dp"
+                android:numColumns="3"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:verticalSpacing="20dp"></GridView>
+
+            <GridView
+                android:id="@+id/gridView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="10dp"
+                android:numColumns="3"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:verticalSpacing="20dp"
+                android:visibility="gone"></GridView>
+
+            <TextView
+                android:id="@+id/hidden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hidden"
                 android:text="0"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
+                android:id="@+id/more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:id="@+id/more"
-                android:text="더 보기"
                 android:background="@drawable/shape"
-                android:textColor="@android:color/white"/>
+                android:text="더 보기"
+                android:textColor="@android:color/white" />
 
             <TextView
-                android:layout_gravity="left"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:id="@+id/menu1"
-                android:textStyle="bold|italic"
-                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
-                android:text="공공기관 사이트"/>
+                android:layout_marginTop="16dp"
+                android:text="공공기관 사이트"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <View
                 android:layout_width="match_parent"
@@ -101,42 +99,42 @@
                 android:background="@android:color/darker_gray" />
 
             <ImageView
+                android:id="@+id/image1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:id="@+id/image1" />
+                android:layout_margin="10dp" />
 
             <ImageView
+                android:id="@+id/image2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/image2" />
+                android:layout_gravity="center" />
 
             <ImageView
+                android:id="@+id/image3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:id="@+id/image3" />
+                android:layout_margin="10dp" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:id="@+id/textView3"/>
+                android:layout_marginBottom="16dp" />
 
             <TextView
-                android:layout_gravity="left"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="10dp"
                 android:id="@+id/menu2"
-                android:textStyle="bold|italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="다음 카페"
                 android:textSize="20sp"
-                android:text="다음 카페"/>
+                android:textStyle="bold|italic" />
 
             <View
                 android:layout_width="match_parent"
@@ -146,29 +144,29 @@
                 android:background="@android:color/darker_gray" />
 
             <ListView
+                android:id="@+id/listView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:id="@+id/listView1"
                 android:divider="#00000000"></ListView>
 
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/textView4"
                 android:layout_margin="16dp" />
 
             <TextView
-                android:layout_gravity="left"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="10dp"
                 android:id="@+id/menu3"
-                android:textStyle="bold|italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="네이버 카페 &amp; 블로그"
                 android:textSize="20sp"
-                android:text="네이버 카페 &amp; 블로그"/>
+                android:textStyle="bold|italic" />
 
             <View
                 android:layout_width="match_parent"
@@ -178,17 +176,17 @@
                 android:background="@android:color/darker_gray" />
 
             <ListView
+                android:id="@+id/listView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:id="@+id/listView2"
                 android:divider="#00000000"></ListView>
 
             <TextView
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/textView5"
                 android:layout_margin="16dp" />
 
         </LinearLayout>

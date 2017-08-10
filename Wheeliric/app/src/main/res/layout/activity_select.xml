@@ -28,7 +28,8 @@
         android:background="#e88091"
         android:layerType="software"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/lineview"/>
 
     <Button
         android:text="현재반경 검색"
@@ -53,5 +54,16 @@
         android:textColor="@android:color/white"
         android:background="@drawable/shape"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recommend"
+        android:text="  추천 리스트 보기   "
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/lineview"
+        android:layout_marginBottom="80dp"/>
 
 </RelativeLayout>

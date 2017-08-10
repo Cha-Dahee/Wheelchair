@@ -21,6 +21,7 @@ public class SelectActivity extends AppCompatActivity {
 
         Button left = (Button) findViewById(R.id.button2);
         Button right = (Button) findViewById(R.id.button3);
+        Button recommend = (Button) findViewById(R.id.recommend);
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,14 @@ public class SelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        recommend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecommendActivity.class);
                 startActivity(intent);
             }
         });

@@ -120,10 +120,8 @@ public class InfoFragment extends Fragment {
         daumCafeList = new DaumCafeList(getActivity(), listView, textView4, address[1] + " " + facility.getName());
         daumCafeList.execute();
 
-        /*
         naverBlogList = new NaverBlogList(getActivity(), listView2, textView5);
         naverBlogList.execute(address[1] + " " + facility.getName());
-        */
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

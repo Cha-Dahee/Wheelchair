@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -69,10 +71,17 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
         } else{
             textView.setText("검색결과가 없습니다.");
         }
+
         listView.setDividerHeight(3);
         listView.setOnItemClickListener(itemClickListenerOfSearchResult);
         listView.invalidate();
         listView.setAdapter(result);
+        int height = blogresult.size();
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = 150 * height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
 
         super.onPostExecute(result);
     }
@@ -106,11 +115,16 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
             JSONArray items = jsonObj.getJSONArray("items");
             for (i = 0; i < items.length(); i++) {
                 JSONObject obj = items.getJSONObject(i);
-                array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
-                array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
-                bloglists.add( obj.getString("bloggerlink") + "/"+array[1]);
-
+                if(obj.getString("link").contains("http://blog.naver.com")){
+                    Log.v("obj", obj.getString("link"));
+                    array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
+                    array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
+                    bloglists.add( obj.getString("bloggerlink") + "/"+array[1]);
+                } else {
+                    bloglists.add(obj.getString("bloggerlink"));
+                }
             }
+
             String[] bloglist = ( String[]) bloglists.toArray( new String[ bloglists.size()]); //결과
 
             //검색어+주차장 돌려서 링크 받아오기
@@ -122,10 +136,15 @@ public class NaverBlogList extends AsyncTask<String, Void, ArrayAdapter<String>>
             JSONArray items_ = jsonObj2.getJSONArray("items");
             for (i = 0; i < items_.length(); i++) {
                 JSONObject obj = items_.getJSONObject(i);
-                array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
-                array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
-                bloglists_park.add( obj.getString("bloggerlink") + "/"+array[1]);
+                if(obj.getString("link").contains("http://blog.naver.com")) {
+                    array = obj.getString("link").split(";"); //link가 logNo을 기준으로 나눠짐
+                    array[1] = array[1].substring(6); //6번째부터 마지막까지 잘라서 다시 저장한다.
+                    bloglists_park.add(obj.getString("bloggerlink") + "/" + array[1]);
+                } else {
+                    bloglists_park.add(obj.getString("bloggerlink"));
+                }
             }
+
             String[] bloglist_ = ( String[]) bloglists_park.toArray( new String[bloglists_park.size()]); //결과
             //두 배열에서 겹치는 거가 있으면 먼저 보여준다.
 

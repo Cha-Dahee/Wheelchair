@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context="org.milal.wheeliric.RecommendActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Wheeliric"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:background="#e88091"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/MainView"/>
+
+    <TextView
+        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/category"
+        android:text="카테고리 선택"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/firstspinner"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/contents"
+        android:text="컨텐츠 선택"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/secondspinner"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/sido"
+        android:text="시/도 선택"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/thirdspinner"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/sigungu"
+        android:text="시/군/구 선택"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/fourthspinner"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="추천 리스트 검색"
+        android:layout_gravity="center"
+        android:id="@+id/goRecommend" />
+
+</LinearLayout>
