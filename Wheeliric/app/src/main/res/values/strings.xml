@@ -384,4 +384,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="facebook_app_id">117753422200498</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">c305d972a1f543bf676e72401dd94fc1</string>
+    <string name="ak_login_protocol_scheme">ak406361306396238</string>
+    <string name="account">Account</string>
+    <string name="phone_label">Phone Number</string>
+    <string name="email_label">Email</string>
+    <string name="id_label">Account ID</string>
+    <string name="logout_label">Log Out</string>
+    <string name="login_email_label">Email로 로그인</string>
+    <string name="login_phone_label">전화번호로 로그인</string>
+    <string name="login_kakao_label">카카오 계정으로 로그인</string>
+
 </resources>

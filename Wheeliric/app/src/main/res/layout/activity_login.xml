@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:id="@+id/main"
+    tools:context="org.milal.wheeliric.LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Wheeliric"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:background="#e88091"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/phone_login_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="100dp"
+        android:onClick="onPhoneLogin"
+        android:text="@string/login_phone_label"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/email_login_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="30dp"
+        android:onClick="onEmailLogin"
+        android:text="@string/login_email_label"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/kakao_login_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="100dp"
+        android:onClick="onKakaoLogin"
+        android:text="@string/login_kakao_label"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

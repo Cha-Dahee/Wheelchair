@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
     <uses-permission android:name="android.permission.READ_OWNER_DATA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -20,7 +19,29 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBLCzWp7yh-mkfoZ5-Mwt9iID8la5_rvxM" />
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
 
+        <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
+        <activity android:name="com.facebook.accountkit.ui.AccountKitEmailRedirectActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/ak_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".AccountActivity"></activity>
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name" />
@@ -44,7 +65,7 @@
             android:label="@string/title_activity_maps2" />
         <activity android:name=".SelectActivity" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".RecommendActivity"></activity>
+        <activity android:name=".RecommendActivity" />
     </application>
 
 </manifest>
