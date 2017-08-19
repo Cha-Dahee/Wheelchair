@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "org.milal.wheeliric"
         minSdkVersion 19
-        targetSdkVersion 19
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,8 +32,8 @@ dependencies {
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.android.support:multidex:1.0.1'
-    compile 'org.tensorflow:libtensorflow_jni:1.3.0-rc2'
-    compile 'org.tensorflow:tensorflow:1.3.0-rc2'
+
+
     testCompile 'junit:junit:4.12'
     compile files('lib/libandroid_tensorflow_inference_java.jar')
 }
