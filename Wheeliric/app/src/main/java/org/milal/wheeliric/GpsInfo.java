@@ -111,17 +111,17 @@ public class GpsInfo extends Service implements LocationListener{
     public void showSettingAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-        alertDialog.setTitle("GPS 사용 유무");
+        alertDialog.setTitle("GPS 설정을 확인해주세요");
         alertDialog.setMessage("GPS 설정창으로 가시겠습니까?");
 
-        alertDialog.setPositiveButton("Setting", new DialogInterface.OnClickListener(){
+        alertDialog.setPositiveButton("설정창으로 가기", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
         });
 
-        alertDialog.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
