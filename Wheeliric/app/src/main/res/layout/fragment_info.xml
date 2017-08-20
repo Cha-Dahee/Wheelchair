@@ -34,10 +34,17 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray" />
+
+            <ImageView
+                android:id="@+id/like_place"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"/>
 
             <GridView
                 android:id="@+id/gridView"

@@ -61,12 +61,16 @@ public class InfoFragment extends Fragment {
         ImageView image1 = (ImageView) view.findViewById(R.id.image1);
         ImageView image2 = (ImageView) view.findViewById(R.id.image2);
         ImageView image3 = (ImageView) view.findViewById(R.id.image3);
+        ImageView image4 = (ImageView) view.findViewById(R.id.like_place);
 
         //TextView 1:이름; 2:주소; 3:정보; 4:image 검색 url어레이 위치
         TextView textView1 = (TextView) view.findViewById(R.id.textView1);
         TextView textView2 = (TextView) view.findViewById(R.id.textView2);
         TextView textView3 = (TextView) view.findViewById(R.id.textView3);
         final TextView hidden = (TextView) view.findViewById(R.id.hidden);
+
+        //유저가 선호하는 장소 일시 heart_filled --후에 좀 더 수정!
+        image4.setImageResource(R.drawable.heart_filled);
 
         //다음 카페 리스트 정보
         ListView listView = (ListView) view.findViewById(R.id.listView1);

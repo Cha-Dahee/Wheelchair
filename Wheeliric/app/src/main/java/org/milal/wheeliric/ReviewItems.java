@@ -8,38 +8,115 @@ package org.milal.wheeliric;
 public class ReviewItems {
     private int photoURL;
     private String nick;
-
-    private String toilet;
-    private String threshold;
-    private String park;
-    private String table;
-    private int grade;
+    private String date;
+    private int toilet;
+    private int entrance;
+    private int park;
+    private int table;
+    private String grade;
     private String comment;
+    private int Like;
+    private int LikeNum;
 
-    public ReviewItems(int photoURL, String nick, String toilet, String threshold, String park, String table, int grade, String comment){
+    public ReviewItems(int photoURL, String nick, String date, int toilet, int entrance, int park, int table, String grade, String comment, int like, int likeNum) {
         this.photoURL = photoURL;
         this.nick = nick;
+        this.date = date;
         this.toilet = toilet;
-        this.threshold = threshold;
+        this.entrance = entrance;
         this.park = park;
         this.table = table;
         this.grade = grade;
-        this. comment = comment;
+        this.comment = comment;
+        Like = like;
+        LikeNum = likeNum;
     }
-    public int getPhotoURL() {return photoURL;}
 
-    public String getNick() {return nick;}
+    public int getPhotoURL() {
+        return photoURL;
+    }
 
-    public String getToilet() {return toilet;}
+    public void setPhotoURL(int photoURL) {
+        this.photoURL = photoURL;
+    }
 
-    public String getThreshold() {return threshold;}
+    public String getNick() {
+        return nick;
+    }
 
-    public String getPark() {return park;}
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
-    public String getTable() {return table;}
+    public String getDate() {
+        return date;
+    }
 
-    public String getComment() {return comment;}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-    public int getGrade() {return grade;}
+    public int getToilet() {
+        return toilet;
+    }
 
+    public void setToilet(int toilet) {
+        this.toilet = toilet;
+    }
+
+    public int getEntrance() {
+        return entrance;
+    }
+
+    public void setEntrance(int entrance) {
+        this.entrance = entrance;
+    }
+
+    public int getPark() {
+        return park;
+    }
+
+    public void setPark(int park) {
+        this.park = park;
+    }
+
+    public int getTable() {
+        return table;
+    }
+
+    public void setTable(int table) {
+        this.table = table;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getLike() {
+        return Like;
+    }
+
+    public void setLike(int like) {
+        Like = like;
+    }
+
+    public int getLikeNum() {
+        return LikeNum;
+    }
+
+    public void setLikeNum(int likeNum) {
+        LikeNum = likeNum;
+    }
 }
