@@ -1,6 +1,7 @@
 package org.milal.wheeliric;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -23,16 +23,14 @@ public class ReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view;
-        //TextView textView1;
-        //TextView textView2;
+
         ListView reviewListView;
         ReviewAdapter reviewAdapter;
 
         ArrayList<ReviewItems> reviewItemsArrayList;
 
         view = inflater.inflate(R.layout.fragment_review, null);
-        //textView1 = (TextView) view.findViewById(R.id.textView1);
-        //textView2 = (TextView) view.findViewById(R.id.textView2);
+
         reviewListView = (ListView) view.findViewById(R.id.review_list);
 
         reviewItemsArrayList = new ArrayList<ReviewItems>();
@@ -61,16 +59,24 @@ public class ReviewFragment extends Fragment {
         reviewAdapter = new ReviewAdapter(this.getActivity(), reviewItemsArrayList);
         reviewListView.setAdapter(reviewAdapter);
 
-        //ImageView image1 = (ImageView) view.findViewById(R.id.image1);
 
-        Button button = (Button) view.findViewById(R.id.write);
+
+        Button writeReviewBtn = (Button) view.findViewById(R.id.write_review);
+        /*
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "리뷰를 쓸거얌", Toast.LENGTH_SHORT).show();
             }
         });
-
+        */
+        writeReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WriteReview.class);
+                startActivity(intent);
+            }
+        });
         facility = new Facility();
         facility.setName(getArguments().getString("name"));
         facility.setCategory(getArguments().getString("category"));
