@@ -77,8 +77,11 @@ public class ReviewAdapter extends BaseAdapter {
         date.setText(reviewItemsArrayList.get(position).getDate());
         grade.setText(reviewItemsArrayList.get(position).getGrade());
         comment.setText(reviewItemsArrayList.get(position).getComment());
+
         photo_re.setImageResource(reviewItemsArrayList.get(position).getPhotoURL());
+
         toilet_re.setImageResource(reviewItemsArrayList.get(position).getToilet());
+
         park_re.setImageResource(reviewItemsArrayList.get(position).getPark());
         table_re.setImageResource(reviewItemsArrayList.get(position).getTable());
         entrance_re.setImageResource(reviewItemsArrayList.get(position).getEntrance());

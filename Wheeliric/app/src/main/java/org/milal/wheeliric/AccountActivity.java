@@ -33,8 +33,6 @@ public class AccountActivity extends AppCompatActivity {
         infoLabel = (TextView) findViewById(R.id.info_label);
         info = (TextView) findViewById(R.id.info);
 
-        //Toast.makeText(this, "test", Toast.LENGTH_LONG).show();
-
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
             @Override
             public void onSuccess(final Account account) {
