@@ -46,7 +46,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         try {
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
             addMarker(mMap);
         } catch (ExecutionException e) {
             e.printStackTrace();

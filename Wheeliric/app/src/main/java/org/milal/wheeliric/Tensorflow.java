@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by Yoojung on 2017-08-04.
  */
@@ -57,6 +59,7 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
             "church",
             "greenhouse",
             "window screen",
+            "dining table"
     };
 
     private static final String[] notWords = {
@@ -89,7 +92,10 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
             "pizza",
             "wooden spoon",
             "saltshaker",
-            "chocolate sauce"
+            "chocolate sauce",
+            "confectionery",
+            "burrito",
+            "tray"
     };
 
     private Context context;
@@ -222,7 +228,7 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
     }
 
     private int input_url(){
-        int current = Integer.parseInt(textView.getText().toString());
+        int current = parseInt(textView.getText().toString());
         int iteration = ITEM_NUM + current;
         for (int i = current; i < iteration && i < 100; i++) {
             String image = images[i];
@@ -253,20 +259,50 @@ public class Tensorflow extends AsyncTask<String[], Void, ImageGridAdapter>{
         bitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false);
         final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
 
-        for(int i = 0; i < words.length; i++) {
-            if (results.toString().contains(words[i])) {
-                for(int j = 0;  j < notWords.length; j++){
-                    if (results.toString().contains(notWords[j]))
-                        return false;
+        String result = results.toString();
+        int start, last;
+
+        result = result.replace("[", "");
+        result = result.replace("]", "");
+        String[] labels = result.split(", ");
+        float[] percentages = new float[labels.length];
+        int isEnt = 0;
+        int isNotEnt = 0;
+
+        for (int k = 0; k < labels.length; k++) {
+            if (!labels[k].isEmpty()) {
+                start = labels[k].indexOf("(");
+                last = labels[k].indexOf("%");
+                percentages[k] = Float.valueOf(labels[k].substring(start + 1, last));
+
+                for (int i = 0; i < words.length; i++) {
+                    if (labels[k].contains(words[i])) {
+                        if (i == 3 && percentages[k] > 50)
+                            return false;
+                        isEnt += percentages[k];
+                    }
                 }
 
-                //description[position] = results.toString();
-                bitmaps[position] = temp;
-                webs[position] = url;
-                position++;
-                return true;
+                for (int j = 0; j < notWords.length; j++) {
+                    if (labels[k].contains(notWords[j]))
+                        isNotEnt += percentages[k];
+                }
             }
         }
-        return false;
+
+        if (isEnt > 15 && isNotEnt == 0) {
+            //description[position] = result;
+            bitmaps[position] = temp;
+            webs[position] = url;
+            position++;
+            return true;
+        } else if(isEnt > 50 && isNotEnt > 0){
+            //description[position] = result;
+            bitmaps[position] = temp;
+            webs[position] = url;
+            position++;
+            return true;
+        } else
+            return false;
     }
 }
