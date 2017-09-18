@@ -107,7 +107,12 @@ public class InfoFragment extends Fragment {
         String[] address = facility.getVicinity().split(" ");
 
         try {
-            ArrayList<URLObject> list = Hparser.execute(address[1] + " " + facility.getName()).get();
+            ArrayList<URLObject> list;
+            if(address[0].contains("특별") || address[0].contains("광역시"))
+                list = Hparser.execute(address[0] + " " + address[2] + facility.getName()).get();
+            else
+                list = Hparser.execute(address[1] + " " + address[2] + " " + facility.getName()).get();
+
             for (int i = 0; i < list.size() && i < 100; i++) {
                 images[i] = list.get(i).getImage();
                 urls[i] = list.get(i).getUrl();

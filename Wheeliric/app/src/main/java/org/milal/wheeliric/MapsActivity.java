@@ -64,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             vicinity = geo.execute(myPosition).get();
             mMap.addMarker(new MarkerOptions().position(myPosition).title("현재위치").snippet(vicinity)).showInfoWindow();
             mMap.moveCamera(CameraUpdateFactory.newLatLng(myPosition));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
             addMarker(mMap);
         } catch (InterruptedException e) {
             e.printStackTrace();
