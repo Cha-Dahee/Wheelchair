@@ -1,6 +1,5 @@
 package org.milal.wheeliric;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,9 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -24,16 +21,12 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.util.HashMap;
-
-import static android.R.attr.name;
 import static com.google.android.gms.wearable.DataMap.TAG;
 import static java.sql.Types.NULL;
-import static org.milal.wheeliric.R.drawable.entrance;
 
 public class ReviewFragment extends Fragment {
 
@@ -275,17 +268,6 @@ public class ReviewFragment extends Fragment {
                                     tabl,
                                     gradeResult, comment,R.drawable.heart_filled, likeN));
                 }
-
-                reviewItemsArrayList.add(new ReviewItems
-                        (R.drawable.starbucks2,
-                                "신유정",
-                                "2017-06-17",
-                                R.drawable.toilet,
-                                entrance,
-                                R.drawable.parking,
-                                R.drawable.table,
-                                "★★★☆☆", "문턱 때문에 전동 휠체어가 지나갈수는 없겠네요",R.drawable.heart_empty, 5));
-
 
             } catch (JSONException e) {
             }

@@ -125,10 +125,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
             }
         });
-
-        /*HashSet<Marker> hashSet = new HashSet<Marker>();
-        hashSet.addAll(pMarker);
-        pMarker.clear();
-        pMarker.addAll(hashSet);*/
     }
 }
