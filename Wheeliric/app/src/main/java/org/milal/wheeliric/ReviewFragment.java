@@ -63,7 +63,7 @@ public class ReviewFragment extends Fragment {
         reviewListView = (ListView) view.findViewById(R.id.review_list);
 
         GetData task = new GetData();
-        task.execute("http://ec2-13-124-46-181.ap-northeast-2.compute.amazonaws.com/getReview.php");
+        task.execute(getString(R.string.DBserverAddress)+"getReview.php");
 
         Button writeReviewBtn = (Button) view.findViewById(R.id.write_review);
         writeReviewBtn.setOnClickListener(new View.OnClickListener() {

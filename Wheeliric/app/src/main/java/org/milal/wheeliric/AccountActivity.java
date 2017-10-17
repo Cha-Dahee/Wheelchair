@@ -41,7 +41,7 @@ public class AccountActivity extends AppCompatActivity {
                 //Get Account Kit ID
                 String accountKitId = account.getId();
                 signUpCheck = new SignUpCheck();
-                signUpCheck.execute(accountKitId);
+                signUpCheck.execute(accountKitId, getString(R.string.DBserverAddress));
                 //Log.d("checkBog:",signUpCheck.getID());
 
                 id.setText(accountKitId);
