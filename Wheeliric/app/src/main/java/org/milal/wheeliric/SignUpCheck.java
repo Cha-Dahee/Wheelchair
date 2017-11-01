@@ -24,7 +24,6 @@ import java.util.concurrent.CountDownLatch;
 
 public class SignUpCheck extends AsyncTask<String, Void, String> {
 
-
     private String DBserverAddress;
 
     private String id = "";
@@ -44,23 +43,19 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
 
     public SignUpCheck(Context context) {
         this.context = context;
-
     }
-
 
     protected void onPreExecute() {
     }
 
     @Override
     protected String doInBackground(String... params) {
-
         try {
             id = params[0];
             DBserverAddress = params[1];
 
             String link = DBserverAddress + "checkNewMember.php?ID=" + id;
-            Log.d("testAddress:", link);
-            //URL url = new URL(link);
+
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
             request.setURI(new URI(link));
@@ -75,13 +70,11 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
                 break;
             }
             in.close();
-            //return sb.toString();
             isNewbie = Integer.parseInt(sb.toString());
 
         } catch (Exception e) {
             return new String("Exception: " + e.getMessage());
         }
-
 
         return "";
     }
@@ -91,6 +84,10 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
         if (isNewbie == -1) {
             showSignUpDialog();
             signUpDialog.show();
+        }
+        //회원일 경우
+        else{
+            signal.countDown();
         }
     }
 
@@ -121,15 +118,12 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
             @Override
             //temp 변수는 함수의 기본형을 맞추기 위함이며 사실 필요 X.
             public void onClick(DialogInterface dialog, int temp) {
-
-
                 nick = nickInput.getText().toString();
                 sex = sexInput.getText().toString();
                 wheelType = wheelTypeInput.getText().toString();
-                Log.d("nickTest:", nick + sex + wheelType);
+
                 dialog.dismiss(); //확인 버튼 누르면 닫기.
                 signal.countDown();
-                //putNewbieDB();
             }
         });
 
@@ -157,14 +151,8 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
 
                 String phplist[] =
                         {
-
                                 DBserverAddress+"signUp.php?ID=" + id +"&nick="+nick,
                                 DBserverAddress + "signUp2.php?nick=" + nick + "&point=10&sex=" + sex + "&wheelchair=" + wheelType
-                                //DBserverAddress+"signUp.php?ID=" + id +"&nick=BogBog",
-                                //DBserverAddress+"signUp2.php?nick=BogBog&point=10&sex=W&wheelchair=manual"
-                                //"http://ec2-52-79-210-218.ap-northeast-2.compute.amazonaws.com/" + "signUp.php?ID=" + "yoojung" + "&nick=BogBog",
-                                //"http://ec2-52-79-210-218.ap-northeast-2.compute.amazonaws.com/" + "signUp2.php?nick=BogBog&point=10&sex=W&wheelchair=manual"
-
                         };
                 try {
                     String link = phplist[i];
