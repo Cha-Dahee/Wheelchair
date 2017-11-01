@@ -1,5 +1,6 @@
 package org.milal.wheeliric;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,9 @@ public class AccountActivity extends AppCompatActivity {
     TextView infoLabel;
     TextView info;
 
+    private SignUpCheck signUpCheck;
+
+    private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,11 @@ public class AccountActivity extends AppCompatActivity {
             public void onSuccess(final Account account) {
                 //Get Account Kit ID
                 String accountKitId = account.getId();
+                signUpCheck = new SignUpCheck(context);
+                signUpCheck.execute(accountKitId, getString(R.string.DBserverAddress));
+                SignUpCheck.putNewbieDB putNewbiedb = signUpCheck.new putNewbieDB();
+                putNewbiedb.execute();
+                //Log.d("checkBog:",signUpCheck.getID());
 
                 id.setText(accountKitId);
 
@@ -101,4 +110,5 @@ public class AccountActivity extends AppCompatActivity {
         }
         return phoneNumber;
     }
+
 }
