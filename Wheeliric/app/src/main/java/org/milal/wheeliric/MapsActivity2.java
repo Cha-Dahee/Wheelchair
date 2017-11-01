@@ -124,9 +124,5 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-        /*HashSet<Marker> hashSet = new HashSet<Marker>();
-        hashSet.addAll(pMarker);
-        pMarker.clear();
-        pMarker.addAll(hashSet);*/
     }
 }

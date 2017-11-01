@@ -397,5 +397,7 @@
     <string name="login_phone_label">전화번호로 로그인</string>
     <string name="login_kakao_label">카카오 계정으로 로그인</string>
 
+    <string name ="DBserverAddress">http://ec2-52-79-210-218.ap-northeast-2.compute.amazonaws.com/</string>
+
 
 </resources>
