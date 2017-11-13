@@ -156,7 +156,6 @@ public class SignUpCheck extends AsyncTask<String, Void, String> {
                         };
                 try {
                     String link = phplist[i];
-                    //URL url = new URL(link);
                     HttpClient client = new DefaultHttpClient();
                     HttpGet request = new HttpGet();
                     request.setURI(new URI(link));
