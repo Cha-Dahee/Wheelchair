@@ -46,7 +46,6 @@ public class AccountActivity extends AppCompatActivity {
                 signUpCheck.execute(accountKitId, getString(R.string.DBserverAddress));
                 SignUpCheck.putNewbieDB putNewbiedb = signUpCheck.new putNewbieDB();
                 putNewbiedb.execute();
-                //Log.d("checkBog:",signUpCheck.getID());
 
                 id.setText(accountKitId);
 
